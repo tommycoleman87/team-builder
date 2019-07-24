@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Form = () => {
+const Form = ({addTeamMember}) => {
   const [member, setMember] = useState({ name: "", email: "", role: "" });
 
  const changeHandler = (event) => {
@@ -8,8 +8,19 @@ const Form = () => {
     setMember({...member, [name]: value})
     console.log(member)
   }
+
+  const addToTeam = (e) => {
+    const addMember = addTeamMember;
+    //console.log(addTeamMember)
+    //console.log(member.name)
+    addMember(member);
+    e.preventDefault()
+  }
+
+
+
   return (
-    <form>
+    <form onSubmit={addToTeam}>
       <label>
         Name
         <div>
@@ -28,6 +39,7 @@ const Form = () => {
           <input name="role" onChange={(event) => changeHandler(event)}/>
         </div>
       </label>
+      <button>Submit</button>
     </form>
   );
 };
